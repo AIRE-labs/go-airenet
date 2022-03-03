@@ -28,8 +28,8 @@ import (
 	"github.com/ethereum/go-ethereum/ethdb"
 	"github.com/ethereum/go-ethereum/params"
 
-	"github.com/Fantom-foundation/go-opera/inter"
-	"github.com/Fantom-foundation/go-opera/opera"
+	"github.com/AIRE-labs/go-airenet/inter"
+	"github.com/AIRE-labs/go-airenet/aire"
 )
 
 // BlockGen creates blocks for testing.
@@ -99,7 +99,7 @@ func (b *BlockGen) AddTxWithChain(bc DummyChain, tx *types.Transaction) {
 	}
 	b.statedb.Prepare(tx.Hash(), common.Hash{}, len(b.txs))
 	blockContext := NewEVMBlockContext(b.header, bc, nil)
-	vmenv := vm.NewEVM(blockContext, vm.TxContext{}, b.statedb, b.config, opera.DefaultVMConfig)
+	vmenv := vm.NewEVM(blockContext, vm.TxContext{}, b.statedb, b.config, aire.DefaultVMConfig)
 	receipt, _, _, err := applyTransaction(msg, b.config, b.gasPool, b.statedb, b.header, tx, &b.header.GasUsed, vmenv, func(log *types.Log, db *state.StateDB) {})
 	if err != nil {
 		panic(err)

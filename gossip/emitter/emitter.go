@@ -17,13 +17,13 @@ import (
 	"github.com/ethereum/go-ethereum/trie"
 	lru "github.com/hashicorp/golang-lru"
 
-	"github.com/Fantom-foundation/go-opera/evmcore"
-	"github.com/Fantom-foundation/go-opera/gossip/emitter/originatedtxs"
-	"github.com/Fantom-foundation/go-opera/inter"
-	"github.com/Fantom-foundation/go-opera/logger"
-	"github.com/Fantom-foundation/go-opera/tracing"
-	"github.com/Fantom-foundation/go-opera/utils/piecefunc"
-	"github.com/Fantom-foundation/go-opera/utils/rate"
+	"github.com/AIRE-labs/go-airenet/evmcore"
+	"github.com/AIRE-labs/go-airenet/gossip/emitter/originatedtxs"
+	"github.com/AIRE-labs/go-airenet/inter"
+	"github.com/AIRE-labs/go-airenet/logger"
+	"github.com/AIRE-labs/go-airenet/tracing"
+	"github.com/AIRE-labs/go-airenet/utils/piecefunc"
+	"github.com/AIRE-labs/go-airenet/utils/rate"
 )
 
 const (

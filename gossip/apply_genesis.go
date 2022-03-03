@@ -10,18 +10,18 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 
-	"github.com/Fantom-foundation/go-opera/evmcore"
-	"github.com/Fantom-foundation/go-opera/gossip/blockproc"
-	"github.com/Fantom-foundation/go-opera/gossip/evmstore"
-	"github.com/Fantom-foundation/go-opera/gossip/sfcapi"
-	"github.com/Fantom-foundation/go-opera/inter"
-	"github.com/Fantom-foundation/go-opera/inter/drivertype"
-	"github.com/Fantom-foundation/go-opera/opera"
-	"github.com/Fantom-foundation/go-opera/opera/genesis"
+	"github.com/AIRE-labs/go-airenet/evmcore"
+	"github.com/AIRE-labs/go-airenet/gossip/blockproc"
+	"github.com/AIRE-labs/go-airenet/gossip/evmstore"
+	"github.com/AIRE-labs/go-airenet/gossip/sfcapi"
+	"github.com/AIRE-labs/go-airenet/inter"
+	"github.com/AIRE-labs/go-airenet/inter/drivertype"
+	"github.com/AIRE-labs/go-airenet/aire"
+	"github.com/AIRE-labs/go-airenet/aire/genesis"
 )
 
 // ApplyGenesis writes initial state.
-func (s *Store) ApplyGenesis(blockProc BlockProc, g opera.Genesis) (genesisHash hash.Hash, err error) {
+func (s *Store) ApplyGenesis(blockProc BlockProc, g aire.Genesis) (genesisHash hash.Hash, err error) {
 	// if we'here, then it's first time genesis is applied
 	err = s.applyEpoch1Genesis(blockProc, g)
 	if err != nil {
@@ -33,7 +33,7 @@ func (s *Store) ApplyGenesis(blockProc BlockProc, g opera.Genesis) (genesisHash 
 	return genesisHash, err
 }
 
-func (s *Store) applyEpoch0Genesis(g opera.Genesis) (evmBlock *evmcore.EvmBlock, err error) {
+func (s *Store) applyEpoch0Genesis(g aire.Genesis) (evmBlock *evmcore.EvmBlock, err error) {
 	// write genesis blocks
 	var highestBlock blockproc.BlockCtx
 	var startingRoot hash.Hash
@@ -120,7 +120,7 @@ func (s *Store) applyEpoch0Genesis(g opera.Genesis) (evmBlock *evmcore.EvmBlock,
 	return evmBlock, nil
 }
 
-func (s *Store) applyEpoch1Genesis(blockProc BlockProc, g opera.Genesis) (err error) {
+func (s *Store) applyEpoch1Genesis(blockProc BlockProc, g aire.Genesis) (err error) {
 	evmBlock0, err := s.applyEpoch0Genesis(g)
 	if err != nil {
 		return err
@@ -183,7 +183,7 @@ func (s *Store) applyEpoch1Genesis(blockProc BlockProc, g opera.Genesis) (err er
 	bs.LastBlock = blockCtx
 	s.SetBlockEpochState(bs, es)
 
-	prettyHash := func(root common.Hash, g opera.Genesis) hash.Event {
+	prettyHash := func(root common.Hash, g aire.Genesis) hash.Event {
 		e := inter.MutableEventPayload{}
 		// for nice-looking ID
 		e.SetEpoch(g.FirstEpoch - 1)

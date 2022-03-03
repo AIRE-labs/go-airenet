@@ -5,8 +5,8 @@ import (
 	"github.com/Fantom-foundation/lachesis-base/inter/pos"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/Fantom-foundation/go-opera/gossip/blockproc"
-	"github.com/Fantom-foundation/go-opera/opera"
+	"github.com/AIRE-labs/go-airenet/gossip/blockproc"
+	"github.com/AIRE-labs/go-airenet/aire"
 )
 
 const sKey = "s"
@@ -76,12 +76,12 @@ func (s *Store) GetLatestBlockIndex() idx.Block {
 }
 
 // GetRules retrieves current network rules
-func (s *Store) GetRules() opera.Rules {
+func (s *Store) GetRules() aire.Rules {
 	return s.GetEpochState().Rules
 }
 
 // GetEpochRules retrieves current network rules and epoch atomically
-func (s *Store) GetEpochRules() (opera.Rules, idx.Epoch) {
+func (s *Store) GetEpochRules() (aire.Rules, idx.Epoch) {
 	es := s.GetEpochState()
 	return es.Rules, es.Epoch
 }

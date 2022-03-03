@@ -1,4 +1,4 @@
-module github.com/Fantom-foundation/go-opera
+module github.com/AIRE-labs/go-airenet
 
 go 1.14
 

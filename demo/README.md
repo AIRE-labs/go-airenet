@@ -1,6 +1,6 @@
 # Demo
 
-Contains the scripts to do opera benchmarking (only for fakenet).
+Contains the scripts to do aire benchmarking (only for fakenet).
 
 ## Scripts
 
@@ -21,7 +21,7 @@ N=3 ./start.sh
 
 * Attach js-console to running node0:
 ```sh
-go run ../cmd/opera attach http://localhost:4000
+go run ../cmd/aire attach http://localhost:4000
 ```
 
 * Check the balance to ensure that node0 has something to transfer (node0 js-console):
@@ -36,7 +36,7 @@ ftm.getBalance(ftm.accounts[0]);
 
 * Get node1 address:
 ```sh
-go run ../cmd/opera attach --exec "ftm.accounts[0]" http://localhost:4001
+go run ../cmd/aire attach --exec "ftm.accounts[0]" http://localhost:4001
 ```
  output shows address:
 ```js
@@ -68,8 +68,8 @@ ftm.getTransactionReceipt("0x68a7c1daeee7e7ab5aedf0d0dba337dbf79ce0988387cf6d63e
 
 * As soon as transaction is included into a block you will see new balance of both node addresses:
 ```sh
-go run ../cmd/opera attach --exec "ftm.getBalance(ftm.accounts[0])" http://localhost:4000
-go run ../cmd/opera attach --exec "ftm.getBalance(ftm.accounts[0])" http://localhost:4001
+go run ../cmd/aire attach --exec "ftm.getBalance(ftm.accounts[0])" http://localhost:4000
+go run ../cmd/aire attach --exec "ftm.getBalance(ftm.accounts[0])" http://localhost:4001
 ```
  outputs:
 ```js

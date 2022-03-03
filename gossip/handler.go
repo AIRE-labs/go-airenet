@@ -26,12 +26,12 @@ import (
 	"github.com/ethereum/go-ethereum/p2p"
 	"github.com/ethereum/go-ethereum/rlp"
 
-	"github.com/Fantom-foundation/go-opera/eventcheck"
-	"github.com/Fantom-foundation/go-opera/eventcheck/parentlesscheck"
-	"github.com/Fantom-foundation/go-opera/evmcore"
-	"github.com/Fantom-foundation/go-opera/inter"
-	"github.com/Fantom-foundation/go-opera/logger"
-	"github.com/Fantom-foundation/go-opera/opera"
+	"github.com/AIRE-labs/go-airenet/eventcheck"
+	"github.com/AIRE-labs/go-airenet/eventcheck/parentlesscheck"
+	"github.com/AIRE-labs/go-airenet/evmcore"
+	"github.com/AIRE-labs/go-airenet/inter"
+	"github.com/AIRE-labs/go-airenet/logger"
+	"github.com/AIRE-labs/go-airenet/aire"
 )
 
 const (
@@ -77,7 +77,7 @@ type handlerConfig struct {
 
 type ProtocolManager struct {
 	config Config
-	net    opera.Rules
+	net    aire.Rules
 
 	synced uint32 // Flag whether we're considered synchronised (enables transaction processing, events broadcasting)
 

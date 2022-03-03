@@ -9,11 +9,11 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/Fantom-foundation/go-opera/evmcore"
-	"github.com/Fantom-foundation/go-opera/gossip/blockproc"
-	"github.com/Fantom-foundation/go-opera/inter"
-	"github.com/Fantom-foundation/go-opera/opera"
-	"github.com/Fantom-foundation/go-opera/utils"
+	"github.com/AIRE-labs/go-airenet/evmcore"
+	"github.com/AIRE-labs/go-airenet/gossip/blockproc"
+	"github.com/AIRE-labs/go-airenet/inter"
+	"github.com/AIRE-labs/go-airenet/aire"
+	"github.com/AIRE-labs/go-airenet/utils"
 )
 
 type EVMModule struct{}
@@ -22,12 +22,12 @@ func New() *EVMModule {
 	return &EVMModule{}
 }
 
-func (p *EVMModule) Start(block blockproc.BlockCtx, statedb *state.StateDB, reader evmcore.DummyChain, onNewLog func(*types.Log), net opera.Rules) blockproc.EVMProcessor {
+func (p *EVMModule) Start(block blockproc.BlockCtx, statedb *state.StateDB, reader evmcore.DummyChain, onNewLog func(*types.Log), net aire.Rules) blockproc.EVMProcessor {
 	var prevBlockHash common.Hash
 	if block.Idx != 0 {
 		prevBlockHash = reader.GetHeader(common.Hash{}, uint64(block.Idx-1)).Hash
 	}
-	return &OperaEVMProcessor{
+	return &AIREEVMProcessor{
 		block:         block,
 		reader:        reader,
 		statedb:       statedb,
@@ -38,12 +38,12 @@ func (p *EVMModule) Start(block blockproc.BlockCtx, statedb *state.StateDB, read
 	}
 }
 
-type OperaEVMProcessor struct {
+type AIREEVMProcessor struct {
 	block    blockproc.BlockCtx
 	reader   evmcore.DummyChain
 	statedb  *state.StateDB
 	onNewLog func(*types.Log)
-	net      opera.Rules
+	net      aire.Rules
 
 	blockIdx      *big.Int
 	prevBlockHash common.Hash
@@ -55,7 +55,7 @@ type OperaEVMProcessor struct {
 	receipts    types.Receipts
 }
 
-func (p *OperaEVMProcessor) evmBlockWith(txs types.Transactions) *evmcore.EvmBlock {
+func (p *AIREEVMProcessor) evmBlockWith(txs types.Transactions) *evmcore.EvmBlock {
 	h := &evmcore.EvmHeader{
 		Number:     p.blockIdx,
 		Hash:       common.Hash(p.block.Atropos),
@@ -70,12 +70,12 @@ func (p *OperaEVMProcessor) evmBlockWith(txs types.Transactions) *evmcore.EvmBlo
 	return evmcore.NewEvmBlock(h, txs)
 }
 
-func (p *OperaEVMProcessor) Execute(txs types.Transactions, internal bool) types.Receipts {
+func (p *AIREEVMProcessor) Execute(txs types.Transactions, internal bool) types.Receipts {
 	evmProcessor := evmcore.NewStateProcessor(p.net.EvmChainConfig(), p.reader)
 
 	// Process txs
 	evmBlock := p.evmBlockWith(txs)
-	receipts, _, skipped, err := evmProcessor.Process(evmBlock, p.statedb, opera.DefaultVMConfig, &p.gasUsed, internal, func(log *types.Log, _ *state.StateDB) {
+	receipts, _, skipped, err := evmProcessor.Process(evmBlock, p.statedb, aire.DefaultVMConfig, &p.gasUsed, internal, func(log *types.Log, _ *state.StateDB) {
 		p.onNewLog(log)
 	})
 	if err != nil {
@@ -96,7 +96,7 @@ func (p *OperaEVMProcessor) Execute(txs types.Transactions, internal bool) types
 	return receipts
 }
 
-func (p *OperaEVMProcessor) Finalize() (evmBlock *evmcore.EvmBlock, skippedTxs []uint32, receipts types.Receipts) {
+func (p *AIREEVMProcessor) Finalize() (evmBlock *evmcore.EvmBlock, skippedTxs []uint32, receipts types.Receipts) {
 	evmBlock = p.evmBlockWith(
 		// Filter skipped transactions. Receipts are filtered already
 		inter.FilterSkippedTxs(p.incomingTxs, p.skippedTxs),

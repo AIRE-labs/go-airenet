@@ -7,42 +7,42 @@ import (
 	"github.com/Fantom-foundation/lachesis-base/inter/pos"
 	"github.com/Fantom-foundation/lachesis-base/lachesis"
 
-	"github.com/Fantom-foundation/go-opera/gossip/blockproc"
+	"github.com/AIRE-labs/go-airenet/gossip/blockproc"
 )
 
-type OperaEpochsSealerModule struct{}
+type AIREEpochsSealerModule struct{}
 
-func New() *OperaEpochsSealerModule {
-	return &OperaEpochsSealerModule{}
+func New() *AIREEpochsSealerModule {
+	return &AIREEpochsSealerModule{}
 }
 
-func (m *OperaEpochsSealerModule) Start(block blockproc.BlockCtx, bs blockproc.BlockState, es blockproc.EpochState) blockproc.SealerProcessor {
-	return &OperaEpochsSealer{
+func (m *AIREEpochsSealerModule) Start(block blockproc.BlockCtx, bs blockproc.BlockState, es blockproc.EpochState) blockproc.SealerProcessor {
+	return &AIREEpochsSealer{
 		block: block,
 		es:    es,
 		bs:    bs,
 	}
 }
 
-type OperaEpochsSealer struct {
+type AIREEpochsSealer struct {
 	block blockproc.BlockCtx
 	es    blockproc.EpochState
 	bs    blockproc.BlockState
 }
 
-func (s *OperaEpochsSealer) EpochSealing() bool {
+func (s *AIREEpochsSealer) EpochSealing() bool {
 	sealEpoch := s.bs.EpochGas >= s.es.Rules.Epochs.MaxEpochGas
 	sealEpoch = sealEpoch || (s.block.Time-s.es.EpochStart) >= s.es.Rules.Epochs.MaxEpochDuration
 	sealEpoch = sealEpoch || s.bs.AdvanceEpochs > 0
 	return sealEpoch || s.bs.EpochCheaters.Len() != 0
 }
 
-func (p *OperaEpochsSealer) Update(bs blockproc.BlockState, es blockproc.EpochState) {
+func (p *AIREEpochsSealer) Update(bs blockproc.BlockState, es blockproc.EpochState) {
 	p.bs, p.es = bs, es
 }
 
 // SealEpoch is called after pre-internal transactions are executed
-func (s *OperaEpochsSealer) SealEpoch() (blockproc.BlockState, blockproc.EpochState) {
+func (s *AIREEpochsSealer) SealEpoch() (blockproc.BlockState, blockproc.EpochState) {
 	// Select new validators
 	oldValidators := s.es.Validators
 	builder := pos.NewBigBuilder()

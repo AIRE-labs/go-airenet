@@ -4,9 +4,9 @@ import (
 	"github.com/Fantom-foundation/lachesis-base/hash"
 	"github.com/Fantom-foundation/lachesis-base/inter/idx"
 
-	"github.com/Fantom-foundation/go-opera/inter"
-	"github.com/Fantom-foundation/go-opera/opera"
-	"github.com/Fantom-foundation/go-opera/utils/concurrent"
+	"github.com/AIRE-labs/go-airenet/inter"
+	"github.com/AIRE-labs/go-airenet/aire"
+	"github.com/AIRE-labs/go-airenet/utils/concurrent"
 )
 
 type GPOBackend struct {
@@ -17,11 +17,11 @@ func (b *GPOBackend) GetLatestBlockIndex() idx.Block {
 	return b.store.GetLatestBlockIndex()
 }
 
-func (b *GPOBackend) GetRules() opera.Rules {
+func (b *GPOBackend) GetRules() aire.Rules {
 	return b.store.GetRules()
 }
 
-func (b *GPOBackend) GetPendingRules() opera.Rules {
+func (b *GPOBackend) GetPendingRules() aire.Rules {
 	return b.store.GetBlockState().DirtyRules
 }
 

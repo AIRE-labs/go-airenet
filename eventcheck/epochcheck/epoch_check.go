@@ -7,8 +7,8 @@ import (
 	"github.com/Fantom-foundation/lachesis-base/inter/idx"
 	"github.com/ethereum/go-ethereum/core/types"
 
-	"github.com/Fantom-foundation/go-opera/inter"
-	"github.com/Fantom-foundation/go-opera/opera"
+	"github.com/AIRE-labs/go-airenet/inter"
+	"github.com/AIRE-labs/go-airenet/aire"
 )
 
 var (
@@ -25,7 +25,7 @@ var (
 // Reader returns currents epoch and its validators group.
 type Reader interface {
 	base.Reader
-	GetEpochRules() (opera.Rules, idx.Epoch)
+	GetEpochRules() (aire.Rules, idx.Epoch)
 }
 
 // Checker which require only current epoch info
@@ -41,7 +41,7 @@ func New(reader Reader) *Checker {
 	}
 }
 
-func CalcGasPowerUsed(e inter.EventPayloadI, rules opera.Rules) uint64 {
+func CalcGasPowerUsed(e inter.EventPayloadI, rules aire.Rules) uint64 {
 	txsGas := uint64(0)
 	for _, tx := range e.Txs() {
 		txsGas += tx.Gas()
@@ -56,7 +56,7 @@ func CalcGasPowerUsed(e inter.EventPayloadI, rules opera.Rules) uint64 {
 	return txsGas + parentsGas + extraGas + rules.Economy.Gas.EventGas
 }
 
-func (v *Checker) checkGas(e inter.EventPayloadI, rules opera.Rules) error {
+func (v *Checker) checkGas(e inter.EventPayloadI, rules aire.Rules) error {
 	if e.GasPowerUsed() > rules.Economy.Gas.MaxEventGas {
 		return ErrTooBigGasUsed
 	}
@@ -66,7 +66,7 @@ func (v *Checker) checkGas(e inter.EventPayloadI, rules opera.Rules) error {
 	return nil
 }
 
-func CheckTxs(txs types.Transactions, rules opera.Rules) error {
+func CheckTxs(txs types.Transactions, rules aire.Rules) error {
 	maxType := uint8(0)
 	if rules.Upgrades.Berlin {
 		maxType++

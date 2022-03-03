@@ -10,10 +10,10 @@ import (
 	"github.com/ethereum/go-ethereum/p2p/simulations/adapters"
 	"github.com/status-im/keycard-go/hexutils"
 
-	"github.com/Fantom-foundation/go-opera/gossip"
-	"github.com/Fantom-foundation/go-opera/inter/validatorpk"
-	"github.com/Fantom-foundation/go-opera/valkeystore"
-	"github.com/Fantom-foundation/go-opera/vecmt"
+	"github.com/AIRE-labs/go-airenet/gossip"
+	"github.com/AIRE-labs/go-airenet/inter/validatorpk"
+	"github.com/AIRE-labs/go-airenet/valkeystore"
+	"github.com/AIRE-labs/go-airenet/vecmt"
 )
 
 var (
@@ -24,8 +24,8 @@ var (
 func NewIntegration(ctx *adapters.ServiceContext, genesis InputGenesis, stack *node.Node) *gossip.Service {
 	gossipCfg := gossip.FakeConfig(1, cachescale.Identity)
 	cfg := Configs{
-		Opera:         gossipCfg,
-		OperaStore:    gossip.DefaultStoreConfig(cachescale.Identity),
+		AIRE:         gossipCfg,
+		AIREStore:    gossip.DefaultStoreConfig(cachescale.Identity),
 		Lachesis:      abft.DefaultConfig(),
 		LachesisStore: abft.DefaultStoreConfig(cachescale.Identity),
 		VectorClock:   vecmt.DefaultConfig(cachescale.Identity),

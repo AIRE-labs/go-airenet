@@ -23,30 +23,30 @@ import (
 	"github.com/ethereum/go-ethereum/p2p/enr"
 	"github.com/ethereum/go-ethereum/rpc"
 
-	"github.com/Fantom-foundation/go-opera/ethapi"
-	"github.com/Fantom-foundation/go-opera/eventcheck"
-	"github.com/Fantom-foundation/go-opera/eventcheck/basiccheck"
-	"github.com/Fantom-foundation/go-opera/eventcheck/epochcheck"
-	"github.com/Fantom-foundation/go-opera/eventcheck/gaspowercheck"
-	"github.com/Fantom-foundation/go-opera/eventcheck/heavycheck"
-	"github.com/Fantom-foundation/go-opera/eventcheck/parentscheck"
-	"github.com/Fantom-foundation/go-opera/evmcore"
-	"github.com/Fantom-foundation/go-opera/gossip/blockproc"
-	"github.com/Fantom-foundation/go-opera/gossip/blockproc/drivermodule"
-	"github.com/Fantom-foundation/go-opera/gossip/blockproc/eventmodule"
-	"github.com/Fantom-foundation/go-opera/gossip/blockproc/evmmodule"
-	"github.com/Fantom-foundation/go-opera/gossip/blockproc/sealmodule"
-	"github.com/Fantom-foundation/go-opera/gossip/blockproc/verwatcher"
-	"github.com/Fantom-foundation/go-opera/gossip/emitter"
-	"github.com/Fantom-foundation/go-opera/gossip/filters"
-	"github.com/Fantom-foundation/go-opera/gossip/gasprice"
-	"github.com/Fantom-foundation/go-opera/inter"
-	"github.com/Fantom-foundation/go-opera/logger"
-	"github.com/Fantom-foundation/go-opera/opera"
-	"github.com/Fantom-foundation/go-opera/utils/gsignercache"
-	"github.com/Fantom-foundation/go-opera/utils/wgmutex"
-	"github.com/Fantom-foundation/go-opera/valkeystore"
-	"github.com/Fantom-foundation/go-opera/vecmt"
+	"github.com/AIRE-labs/go-airenet/ethapi"
+	"github.com/AIRE-labs/go-airenet/eventcheck"
+	"github.com/AIRE-labs/go-airenet/eventcheck/basiccheck"
+	"github.com/AIRE-labs/go-airenet/eventcheck/epochcheck"
+	"github.com/AIRE-labs/go-airenet/eventcheck/gaspowercheck"
+	"github.com/AIRE-labs/go-airenet/eventcheck/heavycheck"
+	"github.com/AIRE-labs/go-airenet/eventcheck/parentscheck"
+	"github.com/AIRE-labs/go-airenet/evmcore"
+	"github.com/AIRE-labs/go-airenet/gossip/blockproc"
+	"github.com/AIRE-labs/go-airenet/gossip/blockproc/drivermodule"
+	"github.com/AIRE-labs/go-airenet/gossip/blockproc/eventmodule"
+	"github.com/AIRE-labs/go-airenet/gossip/blockproc/evmmodule"
+	"github.com/AIRE-labs/go-airenet/gossip/blockproc/sealmodule"
+	"github.com/AIRE-labs/go-airenet/gossip/blockproc/verwatcher"
+	"github.com/AIRE-labs/go-airenet/gossip/emitter"
+	"github.com/AIRE-labs/go-airenet/gossip/filters"
+	"github.com/AIRE-labs/go-airenet/gossip/gasprice"
+	"github.com/AIRE-labs/go-airenet/inter"
+	"github.com/AIRE-labs/go-airenet/logger"
+	"github.com/AIRE-labs/go-airenet/aire"
+	"github.com/AIRE-labs/go-airenet/utils/gsignercache"
+	"github.com/AIRE-labs/go-airenet/utils/wgmutex"
+	"github.com/AIRE-labs/go-airenet/valkeystore"
+	"github.com/AIRE-labs/go-airenet/vecmt"
 )
 
 type ServiceFeed struct {
@@ -90,7 +90,7 @@ type BlockProc struct {
 	EVMModule           blockproc.EVM
 }
 
-func DefaultBlockProc(g opera.Genesis) BlockProc {
+func DefaultBlockProc(g aire.Genesis) BlockProc {
 	return BlockProc{
 		SealerModule:        sealmodule.New(),
 		TxListenerModule:    drivermodule.NewDriverTxListenerModule(),
@@ -270,7 +270,7 @@ func (s *Service) makeEmitter(signer valkeystore.SignerI) *emitter.Emitter {
 	})
 }
 
-// MakeProtocols constructs the P2P protocol definitions for `opera`.
+// MakeProtocols constructs the P2P protocol definitions for `aire`.
 func MakeProtocols(svc *Service, backend *ProtocolManager, network uint64, disc enode.Iterator) []p2p.Protocol {
 	protocols := make([]p2p.Protocol, len(ProtocolVersions))
 	for i, version := range ProtocolVersions {

@@ -12,17 +12,17 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 
-	"github.com/Fantom-foundation/go-opera/inter"
-	"github.com/Fantom-foundation/go-opera/inter/validatorpk"
-	"github.com/Fantom-foundation/go-opera/opera"
-	"github.com/Fantom-foundation/go-opera/opera/genesis"
-	"github.com/Fantom-foundation/go-opera/opera/genesis/driver"
-	"github.com/Fantom-foundation/go-opera/opera/genesis/driverauth"
-	"github.com/Fantom-foundation/go-opera/opera/genesis/evmwriter"
-	"github.com/Fantom-foundation/go-opera/opera/genesis/gpos"
-	"github.com/Fantom-foundation/go-opera/opera/genesis/netinit"
-	"github.com/Fantom-foundation/go-opera/opera/genesis/sfc"
-	"github.com/Fantom-foundation/go-opera/opera/genesisstore"
+	"github.com/AIRE-labs/go-airenet/inter"
+	"github.com/AIRE-labs/go-airenet/inter/validatorpk"
+	"github.com/AIRE-labs/go-airenet/aire"
+	"github.com/AIRE-labs/go-airenet/aire/genesis"
+	"github.com/AIRE-labs/go-airenet/aire/genesis/driver"
+	"github.com/AIRE-labs/go-airenet/aire/genesis/driverauth"
+	"github.com/AIRE-labs/go-airenet/aire/genesis/evmwriter"
+	"github.com/AIRE-labs/go-airenet/aire/genesis/gpos"
+	"github.com/AIRE-labs/go-airenet/aire/genesis/netinit"
+	"github.com/AIRE-labs/go-airenet/aire/genesis/sfc"
+	"github.com/AIRE-labs/go-airenet/aire/genesisstore"
 )
 
 var (
@@ -43,7 +43,7 @@ func FakeKey(n int) *ecdsa.PrivateKey {
 
 func FakeGenesisStore(num int, balance, stake *big.Int) *genesisstore.Store {
 	genStore := genesisstore.NewMemStore()
-	genStore.SetRules(opera.FakeNetRules())
+	genStore.SetRules(aire.FakeNetRules())
 
 	validators := GetFakeValidators(num)
 

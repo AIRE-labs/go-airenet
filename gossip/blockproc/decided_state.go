@@ -10,8 +10,8 @@ import (
 	"github.com/Fantom-foundation/lachesis-base/lachesis"
 	"github.com/ethereum/go-ethereum/rlp"
 
-	"github.com/Fantom-foundation/go-opera/inter"
-	"github.com/Fantom-foundation/go-opera/opera"
+	"github.com/AIRE-labs/go-airenet/inter"
+	"github.com/AIRE-labs/go-airenet/aire"
 )
 
 type ValidatorBlockState struct {
@@ -46,7 +46,7 @@ type BlockState struct {
 	ValidatorStates       []ValidatorBlockState
 	NextValidatorProfiles ValidatorProfiles
 
-	DirtyRules opera.Rules
+	DirtyRules aire.Rules
 
 	AdvanceEpochs idx.Epoch
 }
@@ -81,7 +81,7 @@ type EpochState struct {
 	ValidatorStates   []ValidatorEpochState
 	ValidatorProfiles ValidatorProfiles
 
-	Rules opera.Rules
+	Rules aire.Rules
 }
 
 func (es *EpochState) GetValidatorState(id idx.ValidatorID, validators *pos.Validators) *ValidatorEpochState {

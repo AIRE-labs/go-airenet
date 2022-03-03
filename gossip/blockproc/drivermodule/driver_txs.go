@@ -11,20 +11,20 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/Fantom-foundation/go-opera/gossip/blockproc"
-	"github.com/Fantom-foundation/go-opera/inter"
-	"github.com/Fantom-foundation/go-opera/inter/drivertype"
-	"github.com/Fantom-foundation/go-opera/inter/validatorpk"
-	"github.com/Fantom-foundation/go-opera/opera"
-	"github.com/Fantom-foundation/go-opera/opera/genesis"
-	"github.com/Fantom-foundation/go-opera/opera/genesis/driver"
-	"github.com/Fantom-foundation/go-opera/opera/genesis/driver/drivercall"
-	"github.com/Fantom-foundation/go-opera/opera/genesis/driver/driverpos"
-	"github.com/Fantom-foundation/go-opera/opera/genesis/driverauth"
-	"github.com/Fantom-foundation/go-opera/opera/genesis/evmwriter"
-	"github.com/Fantom-foundation/go-opera/opera/genesis/netinit"
-	netinitcall "github.com/Fantom-foundation/go-opera/opera/genesis/netinit/netinitcalls"
-	"github.com/Fantom-foundation/go-opera/opera/genesis/sfc"
+	"github.com/AIRE-labs/go-airenet/gossip/blockproc"
+	"github.com/AIRE-labs/go-airenet/inter"
+	"github.com/AIRE-labs/go-airenet/inter/drivertype"
+	"github.com/AIRE-labs/go-airenet/inter/validatorpk"
+	"github.com/AIRE-labs/go-airenet/aire"
+	"github.com/AIRE-labs/go-airenet/aire/genesis"
+	"github.com/AIRE-labs/go-airenet/aire/genesis/driver"
+	"github.com/AIRE-labs/go-airenet/aire/genesis/driver/drivercall"
+	"github.com/AIRE-labs/go-airenet/aire/genesis/driver/driverpos"
+	"github.com/AIRE-labs/go-airenet/aire/genesis/driverauth"
+	"github.com/AIRE-labs/go-airenet/aire/genesis/evmwriter"
+	"github.com/AIRE-labs/go-airenet/aire/genesis/netinit"
+	netinitcall "github.com/AIRE-labs/go-airenet/aire/genesis/netinit/netinitcalls"
+	"github.com/AIRE-labs/go-airenet/aire/genesis/sfc"
 )
 
 const (
@@ -58,7 +58,7 @@ type DriverTxTransactor struct{}
 type DriverTxPreTransactor struct{}
 
 type DriverTxGenesisTransactor struct {
-	g opera.Genesis
+	g aire.Genesis
 }
 
 func NewDriverTxTransactor() *DriverTxTransactor {
@@ -69,7 +69,7 @@ func NewDriverTxPreTransactor() *DriverTxPreTransactor {
 	return &DriverTxPreTransactor{}
 }
 
-func NewDriverTxGenesisTransactor(g opera.Genesis) *DriverTxGenesisTransactor {
+func NewDriverTxGenesisTransactor(g aire.Genesis) *DriverTxGenesisTransactor {
 	return &DriverTxGenesisTransactor{
 		g: g,
 	}
@@ -137,13 +137,13 @@ func (p *DriverTxPreTransactor) PopInternalTxs(block blockproc.BlockCtx, bs bloc
 		for oldValIdx := idx.Validator(0); oldValIdx < es.Validators.Len(); oldValIdx++ {
 			info := bs.ValidatorStates[oldValIdx]
 			// forgive downtime if below BlockMissedSlack
-			missed := opera.BlocksMissed{
+			missed := aire.BlocksMissed{
 				BlocksNum: maxBlockIdx(block.Idx, info.LastBlock) - info.LastBlock,
 				Period:    inter.MaxTimestamp(block.Time, info.LastOnlineTime) - info.LastOnlineTime,
 			}
 			uptime := info.Uptime
 			if missed.BlocksNum <= es.Rules.Economy.BlockMissedSlack {
-				missed = opera.BlocksMissed{}
+				missed = aire.BlocksMissed{}
 				prevOnlineTime := inter.MaxTimestamp(info.LastOnlineTime, es.EpochStart)
 				uptime += inter.MaxTimestamp(block.Time, prevOnlineTime) - prevOnlineTime
 			}
@@ -251,7 +251,7 @@ func (p *DriverTxListener) OnNewLog(l *types.Log) {
 			return
 		}
 
-		p.bs.DirtyRules, err = opera.UpdateRules(p.bs.DirtyRules, diff)
+		p.bs.DirtyRules, err = aire.UpdateRules(p.bs.DirtyRules, diff)
 		if err != nil {
 			log.Warn("Network rules update error", "err", err)
 			return

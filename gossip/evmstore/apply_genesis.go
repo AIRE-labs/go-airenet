@@ -5,8 +5,8 @@ import (
 	"github.com/Fantom-foundation/lachesis-base/kvdb"
 	"github.com/syndtr/goleveldb/leveldb/opt"
 
-	"github.com/Fantom-foundation/go-opera/evmcore"
-	"github.com/Fantom-foundation/go-opera/opera"
+	"github.com/AIRE-labs/go-airenet/evmcore"
+	"github.com/AIRE-labs/go-airenet/aire"
 )
 
 func (s *Store) applyRawEvmItems(db kvdb.Iteratee) (err error) {
@@ -31,7 +31,7 @@ func (s *Store) applyRawEvmItems(db kvdb.Iteratee) (err error) {
 }
 
 // ApplyGenesis writes initial state.
-func (s *Store) ApplyGenesis(g opera.Genesis, startingRoot hash.Hash) (evmBlock *evmcore.EvmBlock, err error) {
+func (s *Store) ApplyGenesis(g aire.Genesis, startingRoot hash.Hash) (evmBlock *evmcore.EvmBlock, err error) {
 	// apply raw EVM storage
 	err = s.applyRawEvmItems(g.RawEvmItems)
 	if err != nil {

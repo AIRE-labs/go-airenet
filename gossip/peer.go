@@ -18,7 +18,7 @@ import (
 	"github.com/ethereum/go-ethereum/p2p"
 	"github.com/ethereum/go-ethereum/rlp"
 
-	"github.com/Fantom-foundation/go-opera/inter"
+	"github.com/AIRE-labs/go-airenet/inter"
 )
 
 var (
@@ -517,7 +517,7 @@ func (p *peer) readStatus(network uint64, handshake *handshakeData, genesis comm
 // String implements fmt.Stringer.
 func (p *peer) String() string {
 	return fmt.Sprintf("Peer %s [%s]", p.id,
-		fmt.Sprintf("opera/%2d", p.version),
+		fmt.Sprintf("aire/%2d", p.version),
 	)
 }
 

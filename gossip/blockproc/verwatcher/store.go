@@ -3,7 +3,7 @@ package verwatcher
 import (
 	"github.com/Fantom-foundation/lachesis-base/kvdb"
 
-	"github.com/Fantom-foundation/go-opera/logger"
+	"github.com/AIRE-labs/go-airenet/logger"
 )
 
 // Store is a node persistent storage working over physical key-value database.
