@@ -5,9 +5,9 @@ import (
 	"github.com/ethereum/go-ethereum/core/state"
 	"github.com/ethereum/go-ethereum/core/types"
 
-	"github.com/Fantom-foundation/go-opera/evmcore"
-	"github.com/Fantom-foundation/go-opera/inter"
-	"github.com/Fantom-foundation/go-opera/opera"
+	"github.com/AIRE-labs/go-airenet/evmcore"
+	"github.com/AIRE-labs/go-airenet/inter"
+	"github.com/AIRE-labs/go-airenet/aire"
 )
 
 type TxListener interface {
@@ -50,5 +50,5 @@ type EVMProcessor interface {
 }
 
 type EVM interface {
-	Start(block BlockCtx, statedb *state.StateDB, reader evmcore.DummyChain, onNewLog func(*types.Log), net opera.Rules) EVMProcessor
+	Start(block BlockCtx, statedb *state.StateDB, reader evmcore.DummyChain, onNewLog func(*types.Log), net aire.Rules) EVMProcessor
 }

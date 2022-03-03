@@ -8,9 +8,9 @@ import (
 	"github.com/Fantom-foundation/lachesis-base/kvdb"
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/Fantom-foundation/go-opera/inter"
-	"github.com/Fantom-foundation/go-opera/utils/concurrent"
-	"github.com/Fantom-foundation/go-opera/utils/migration"
+	"github.com/AIRE-labs/go-airenet/inter"
+	"github.com/AIRE-labs/go-airenet/utils/concurrent"
+	"github.com/AIRE-labs/go-airenet/utils/migration"
 )
 
 func isEmptyDB(db kvdb.Iteratee) bool {
@@ -33,7 +33,7 @@ func (s *Store) migrateData() error {
 
 func (s *Store) migrations() *migration.Migration {
 	return migration.
-		Begin("opera-gossip-store").
+		Begin("aire-gossip-store").
 		Next("used gas recovery", s.recoverUsedGas).
 		Next("tx hashes recovery", s.recoverTxHashes).
 		Next("DAG heads recovery", s.recoverHeadsStorage).

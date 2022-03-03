@@ -22,7 +22,7 @@ import (
 	"github.com/ethereum/go-ethereum/p2p/enode"
 	"github.com/ethereum/go-ethereum/rlp"
 
-	"github.com/Fantom-foundation/go-opera/evmcore"
+	"github.com/AIRE-labs/go-airenet/evmcore"
 )
 
 // enrEntry is the ENR entry which advertises `eth` protocol on the discovery.
@@ -35,10 +35,10 @@ type enrEntry struct {
 
 // ENRKey implements enr.Entry.
 func (e enrEntry) ENRKey() string {
-	return "opera"
+	return "aire"
 }
 
-// StartENRUpdater starts the `opera` ENR updater loop, which listens for chain
+// StartENRUpdater starts the `aire` ENR updater loop, which listens for chain
 // head events and updates the requested node record whenever a fork is passed.
 func StartENRUpdater(svc *Service, ln *enode.LocalNode) {
 	var newHead = make(chan evmcore.ChainHeadNotify, 10)

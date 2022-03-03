@@ -8,11 +8,11 @@ import (
 	"github.com/Fantom-foundation/lachesis-base/inter/idx"
 	"github.com/ethereum/go-ethereum/core/types"
 
-	"github.com/Fantom-foundation/go-opera/evmcore"
-	"github.com/Fantom-foundation/go-opera/inter"
-	"github.com/Fantom-foundation/go-opera/utils/wgmutex"
-	"github.com/Fantom-foundation/go-opera/valkeystore"
-	"github.com/Fantom-foundation/go-opera/vecmt"
+	"github.com/AIRE-labs/go-airenet/evmcore"
+	"github.com/AIRE-labs/go-airenet/inter"
+	"github.com/AIRE-labs/go-airenet/utils/wgmutex"
+	"github.com/AIRE-labs/go-airenet/valkeystore"
+	"github.com/AIRE-labs/go-airenet/vecmt"
 )
 
 // emitterWorld implements emitter.World interface

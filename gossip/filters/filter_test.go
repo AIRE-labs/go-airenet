@@ -32,8 +32,8 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/params"
 
-	"github.com/Fantom-foundation/go-opera/topicsdb"
-	"github.com/Fantom-foundation/go-opera/utils/adapters/ethdb2kvdb"
+	"github.com/AIRE-labs/go-airenet/topicsdb"
+	"github.com/AIRE-labs/go-airenet/utils/adapters/ethdb2kvdb"
 )
 
 func testConfig() Config {

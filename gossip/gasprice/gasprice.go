@@ -24,8 +24,8 @@ import (
 
 	"github.com/Fantom-foundation/lachesis-base/inter/idx"
 
-	"github.com/Fantom-foundation/go-opera/opera"
-	"github.com/Fantom-foundation/go-opera/utils/piecefunc"
+	"github.com/AIRE-labs/go-airenet/aire"
+	"github.com/AIRE-labs/go-airenet/utils/piecefunc"
 
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/params"
@@ -50,8 +50,8 @@ type Config struct {
 type Reader interface {
 	GetLatestBlockIndex() idx.Block
 	TotalGasPowerLeft() uint64
-	GetRules() opera.Rules
-	GetPendingRules() opera.Rules
+	GetRules() aire.Rules
+	GetPendingRules() aire.Rules
 }
 
 // Oracle recommends gas prices based on the content of recent

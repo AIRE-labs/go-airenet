@@ -17,8 +17,8 @@ import (
 	"github.com/ethereum/go-ethereum/p2p/simulations"
 	"github.com/ethereum/go-ethereum/p2p/simulations/adapters"
 
-	"github.com/Fantom-foundation/go-opera/integration/makegenesis"
-	"github.com/Fantom-foundation/go-opera/opera/genesisstore"
+	"github.com/AIRE-labs/go-airenet/integration/makegenesis"
+	"github.com/AIRE-labs/go-airenet/aire/genesisstore"
 )
 
 type topology func(net *simulations.Network, nodes []enode.ID)

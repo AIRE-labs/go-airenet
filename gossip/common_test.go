@@ -22,13 +22,13 @@ import (
 	"github.com/ethereum/go-ethereum/core/vm"
 	"github.com/ethereum/go-ethereum/crypto"
 
-	"github.com/Fantom-foundation/go-opera/evmcore"
-	"github.com/Fantom-foundation/go-opera/integration/makegenesis"
-	"github.com/Fantom-foundation/go-opera/inter"
-	"github.com/Fantom-foundation/go-opera/opera"
-	"github.com/Fantom-foundation/go-opera/opera/genesis/gpos"
-	"github.com/Fantom-foundation/go-opera/utils"
-	"github.com/Fantom-foundation/go-opera/utils/gsignercache"
+	"github.com/AIRE-labs/go-airenet/evmcore"
+	"github.com/AIRE-labs/go-airenet/integration/makegenesis"
+	"github.com/AIRE-labs/go-airenet/inter"
+	"github.com/AIRE-labs/go-airenet/aire"
+	"github.com/AIRE-labs/go-airenet/aire/genesis/gpos"
+	"github.com/AIRE-labs/go-airenet/utils"
+	"github.com/AIRE-labs/go-airenet/utils/gsignercache"
 )
 
 const (
@@ -301,7 +301,7 @@ func (env *testEnv) callContract(
 	// about the transaction and calling mechanisms.
 	txContext := evmcore.NewEVMTxContext(msg)
 	context := evmcore.NewEVMBlockContext(block.Header(), env.GetEvmStateReader(), nil)
-	vmenv := vm.NewEVM(context, txContext, state, env.store.GetRules().EvmChainConfig(), opera.DefaultVMConfig)
+	vmenv := vm.NewEVM(context, txContext, state, env.store.GetRules().EvmChainConfig(), aire.DefaultVMConfig)
 	gaspool := new(evmcore.GasPool).AddGas(math.MaxUint64)
 	res, err := evmcore.NewStateTransition(vmenv, msg, gaspool).TransitionDb()
 

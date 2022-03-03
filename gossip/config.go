@@ -14,13 +14,13 @@ import (
 	"github.com/Fantom-foundation/lachesis-base/utils/cachescale"
 	"github.com/syndtr/goleveldb/leveldb/opt"
 
-	"github.com/Fantom-foundation/go-opera/eventcheck/heavycheck"
-	"github.com/Fantom-foundation/go-opera/evmcore"
-	"github.com/Fantom-foundation/go-opera/gossip/blockproc/verwatcher"
-	"github.com/Fantom-foundation/go-opera/gossip/emitter"
-	"github.com/Fantom-foundation/go-opera/gossip/evmstore"
-	"github.com/Fantom-foundation/go-opera/gossip/filters"
-	"github.com/Fantom-foundation/go-opera/gossip/gasprice"
+	"github.com/AIRE-labs/go-airenet/eventcheck/heavycheck"
+	"github.com/AIRE-labs/go-airenet/evmcore"
+	"github.com/AIRE-labs/go-airenet/gossip/blockproc/verwatcher"
+	"github.com/AIRE-labs/go-airenet/gossip/emitter"
+	"github.com/AIRE-labs/go-airenet/gossip/evmstore"
+	"github.com/AIRE-labs/go-airenet/gossip/filters"
+	"github.com/AIRE-labs/go-airenet/gossip/gasprice"
 )
 
 const nominalSize uint = 1

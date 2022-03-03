@@ -7,8 +7,8 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	notify "github.com/ethereum/go-ethereum/event"
 
-	"github.com/Fantom-foundation/go-opera/evmcore"
-	"github.com/Fantom-foundation/go-opera/inter"
+	"github.com/AIRE-labs/go-airenet/evmcore"
+	"github.com/AIRE-labs/go-airenet/inter"
 )
 
 // Constants to match up protocol versions and messages
@@ -17,7 +17,7 @@ const (
 )
 
 // ProtocolName is the official short name of the protocol used during capability negotiation.
-const ProtocolName = "opera"
+const ProtocolName = "aire"
 
 // ProtocolVersions are the supported versions of the protocol (first is primary).
 var ProtocolVersions = []uint{ProtocolVersion}

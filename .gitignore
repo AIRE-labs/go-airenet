@@ -34,7 +34,7 @@ glide.lock
 *.tgz
 *.zip
 
-# opera project specific
+# aire project specific
 scripts/certs
 scripts/nodes
 scripts/peers.json

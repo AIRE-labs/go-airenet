@@ -15,12 +15,12 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/syndtr/goleveldb/leveldb/opt"
 
-	"github.com/Fantom-foundation/go-opera/gossip"
-	"github.com/Fantom-foundation/go-opera/integration/makegenesis"
-	"github.com/Fantom-foundation/go-opera/inter"
-	"github.com/Fantom-foundation/go-opera/opera/genesisstore"
-	"github.com/Fantom-foundation/go-opera/utils"
-	"github.com/Fantom-foundation/go-opera/vecmt"
+	"github.com/AIRE-labs/go-airenet/gossip"
+	"github.com/AIRE-labs/go-airenet/integration/makegenesis"
+	"github.com/AIRE-labs/go-airenet/inter"
+	"github.com/AIRE-labs/go-airenet/aire/genesisstore"
+	"github.com/AIRE-labs/go-airenet/utils"
+	"github.com/AIRE-labs/go-airenet/vecmt"
 )
 
 func BenchmarkFlushDBs(b *testing.B) {
@@ -41,8 +41,8 @@ func BenchmarkFlushDBs(b *testing.B) {
 			return nil
 		},
 	}, Configs{
-		Opera:         gossip.DefaultConfig(cachescale.Identity),
-		OperaStore:    gossip.DefaultStoreConfig(cachescale.Identity),
+		AIRE:         gossip.DefaultConfig(cachescale.Identity),
+		AIREStore:    gossip.DefaultStoreConfig(cachescale.Identity),
 		Lachesis:      abft.DefaultConfig(),
 		LachesisStore: abft.DefaultStoreConfig(cachescale.Identity),
 		VectorClock:   vecmt.DefaultConfig(cachescale.Identity),

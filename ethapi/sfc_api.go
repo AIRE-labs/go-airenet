@@ -8,7 +8,7 @@ import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/Fantom-foundation/go-opera/gossip/sfcapi"
+	"github.com/AIRE-labs/go-airenet/gossip/sfcapi"
 )
 
 // PublicSfcAPI provides an API to access SFC related information.

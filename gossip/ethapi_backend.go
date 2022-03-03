@@ -22,15 +22,15 @@ import (
 	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/pkg/errors"
 
-	"github.com/Fantom-foundation/go-opera/ethapi"
-	"github.com/Fantom-foundation/go-opera/evmcore"
-	"github.com/Fantom-foundation/go-opera/gossip/blockproc"
-	"github.com/Fantom-foundation/go-opera/gossip/sfcapi"
-	"github.com/Fantom-foundation/go-opera/inter"
-	"github.com/Fantom-foundation/go-opera/inter/drivertype"
-	"github.com/Fantom-foundation/go-opera/opera"
-	"github.com/Fantom-foundation/go-opera/topicsdb"
-	"github.com/Fantom-foundation/go-opera/tracing"
+	"github.com/AIRE-labs/go-airenet/ethapi"
+	"github.com/AIRE-labs/go-airenet/evmcore"
+	"github.com/AIRE-labs/go-airenet/gossip/blockproc"
+	"github.com/AIRE-labs/go-airenet/gossip/sfcapi"
+	"github.com/AIRE-labs/go-airenet/inter"
+	"github.com/AIRE-labs/go-airenet/inter/drivertype"
+	"github.com/AIRE-labs/go-airenet/aire"
+	"github.com/AIRE-labs/go-airenet/topicsdb"
+	"github.com/AIRE-labs/go-airenet/tracing"
 )
 
 // EthAPIBackend implements ethapi.Backend.
@@ -302,7 +302,7 @@ func (b *EthAPIBackend) GetEVM(ctx context.Context, msg evmcore.Message, state *
 	vmError := func() error { return nil }
 
 	if vmConfig == nil {
-		vmConfig = &opera.DefaultVMConfig
+		vmConfig = &aire.DefaultVMConfig
 	}
 	txContext := evmcore.NewEVMTxContext(msg)
 	context := evmcore.NewEVMBlockContext(header, b.state, nil)

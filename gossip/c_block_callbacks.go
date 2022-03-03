@@ -17,14 +17,14 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/Fantom-foundation/go-opera/evmcore"
-	"github.com/Fantom-foundation/go-opera/gossip/blockproc"
-	"github.com/Fantom-foundation/go-opera/gossip/blockproc/verwatcher"
-	"github.com/Fantom-foundation/go-opera/gossip/emitter"
-	"github.com/Fantom-foundation/go-opera/gossip/evmstore"
-	"github.com/Fantom-foundation/go-opera/gossip/sfcapi"
-	"github.com/Fantom-foundation/go-opera/inter"
-	"github.com/Fantom-foundation/go-opera/opera"
+	"github.com/AIRE-labs/go-airenet/evmcore"
+	"github.com/AIRE-labs/go-airenet/gossip/blockproc"
+	"github.com/AIRE-labs/go-airenet/gossip/blockproc/verwatcher"
+	"github.com/AIRE-labs/go-airenet/gossip/emitter"
+	"github.com/AIRE-labs/go-airenet/gossip/evmstore"
+	"github.com/AIRE-labs/go-airenet/gossip/sfcapi"
+	"github.com/AIRE-labs/go-airenet/inter"
+	"github.com/AIRE-labs/go-airenet/aire"
 )
 
 type ExtendedTxPosition struct {
@@ -315,7 +315,7 @@ func consensusCallbackBeginBlockFn(
 }
 
 // spillBlockEvents excludes first events which exceed MaxBlockGas
-func spillBlockEvents(store *Store, block *inter.Block, network opera.Rules) (*inter.Block, inter.EventPayloads) {
+func spillBlockEvents(store *Store, block *inter.Block, network aire.Rules) (*inter.Block, inter.EventPayloads) {
 	fullEvents := make(inter.EventPayloads, len(block.Events))
 	if len(block.Events) == 0 {
 		return block, fullEvents

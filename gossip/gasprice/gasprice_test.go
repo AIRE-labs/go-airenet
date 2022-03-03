@@ -7,14 +7,14 @@ import (
 	"github.com/Fantom-foundation/lachesis-base/inter/idx"
 	"github.com/stretchr/testify/require"
 
-	"github.com/Fantom-foundation/go-opera/opera"
+	"github.com/AIRE-labs/go-airenet/aire"
 )
 
 type TestBackend struct {
 	block             idx.Block
 	totalGasPowerLeft uint64
-	rules             opera.Rules
-	pendingRules      opera.Rules
+	rules             aire.Rules
+	pendingRules      aire.Rules
 }
 
 func (t TestBackend) GetLatestBlockIndex() idx.Block {
@@ -25,11 +25,11 @@ func (t TestBackend) TotalGasPowerLeft() uint64 {
 	return t.totalGasPowerLeft
 }
 
-func (t TestBackend) GetRules() opera.Rules {
+func (t TestBackend) GetRules() aire.Rules {
 	return t.rules
 }
 
-func (t TestBackend) GetPendingRules() opera.Rules {
+func (t TestBackend) GetPendingRules() aire.Rules {
 	return t.pendingRules
 }
 
@@ -64,8 +64,8 @@ func TestSuggestPrice(t *testing.T) {
 	backend := &TestBackend{
 		block:             1,
 		totalGasPowerLeft: 0,
-		rules:             opera.FakeNetRules(),
-		pendingRules:      opera.FakeNetRules(),
+		rules:             aire.FakeNetRules(),
+		pendingRules:      aire.FakeNetRules(),
 	}
 
 	gpo := NewOracle(backend, Config{})

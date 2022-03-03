@@ -2,11 +2,11 @@ package gossip
 
 // compile SFC with truffle
 //go:generate bash -c "cd ../../opera-sfc && git checkout c1d33c81f74abf82c0e22807f16e609578e10ad8"
-//go:generate bash -c "docker run --name go-opera-sfc-compiler -v $(pwd)/contract/solc:/src/build/contracts -v $(pwd)/../../opera-sfc:/src -w /src node:10.5.0 bash -c 'export NPM_CONFIG_PREFIX=~; npm install --no-save; npm install --no-save truffle@5.1.4' && docker commit go-opera-sfc-compiler go-opera-sfc-compiler-image && docker rm go-opera-sfc-compiler"
-//go:generate bash -c "docker run --rm -v $(pwd)/contract/solc:/src/build/contracts -v $(pwd)/../../opera-sfc:/src -w /src go-opera-sfc-compiler-image bash -c 'export NPM_CONFIG_PREFIX=~; rm -f /src/build/contracts/*json; npm run build'"
+//go:generate bash -c "docker run --name go-airenet-sfc-compiler -v $(pwd)/contract/solc:/src/build/contracts -v $(pwd)/../../opera-sfc:/src -w /src node:10.5.0 bash -c 'export NPM_CONFIG_PREFIX=~; npm install --no-save; npm install --no-save truffle@5.1.4' && docker commit go-airenet-sfc-compiler go-airenet-sfc-compiler-image && docker rm go-airenet-sfc-compiler"
+//go:generate bash -c "docker run --rm -v $(pwd)/contract/solc:/src/build/contracts -v $(pwd)/../../opera-sfc:/src -w /src go-airenet-sfc-compiler-image bash -c 'export NPM_CONFIG_PREFIX=~; rm -f /src/build/contracts/*json; npm run build'"
 //go:generate bash -c "cd ./contract/solc && for f in LegacySfcWrapper.json; do jq -j .bytecode $DOLLAR{f} > $DOLLAR{f%.json}.bin; jq -j .deployedBytecode $DOLLAR{f} > $DOLLAR{f%.json}.bin-runtime; jq -c .abi $DOLLAR{f} > $DOLLAR{f%.json}.abi; done"
-//go:generate bash -c "docker run --rm -v $(pwd)/contract/solc:/src/build/contracts -v $(pwd)/../../opera-sfc:/src -w /src go-opera-sfc-compiler-image bash -c 'export NPM_CONFIG_PREFIX=~; sed -i s/runs:\\ 200,/runs:\\ 10000,/ /src/truffle-config.js; rm -f /src/build/contracts/*json; npm run build'"
-//go:generate bash -c "cd ../../opera-sfc && git checkout -- truffle-config.js; docker rmi go-opera-sfc-compiler-image"
+//go:generate bash -c "docker run --rm -v $(pwd)/contract/solc:/src/build/contracts -v $(pwd)/../../opera-sfc:/src -w /src go-airenet-sfc-compiler-image bash -c 'export NPM_CONFIG_PREFIX=~; sed -i s/runs:\\ 200,/runs:\\ 10000,/ /src/truffle-config.js; rm -f /src/build/contracts/*json; npm run build'"
+//go:generate bash -c "cd ../../opera-sfc && git checkout -- truffle-config.js; docker rmi go-airenet-sfc-compiler-image"
 //go:generate bash -c "cd ./contract/solc && for f in NetworkInitializer.json NodeDriver.json NodeDriverAuth.json; do jq -j .bytecode $DOLLAR{f} > $DOLLAR{f%.json}.bin; jq -j .deployedBytecode $DOLLAR{f} > $DOLLAR{f%.json}.bin-runtime; jq -c .abi $DOLLAR{f} > $DOLLAR{f%.json}.abi; done"
 
 // wrap LegacySfcWrapper with golang
@@ -35,17 +35,17 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/Fantom-foundation/go-opera/gossip/contract/driver100"
-	"github.com/Fantom-foundation/go-opera/gossip/contract/driverauth100"
-	"github.com/Fantom-foundation/go-opera/gossip/contract/netinit100"
-	"github.com/Fantom-foundation/go-opera/gossip/contract/sfc100"
-	"github.com/Fantom-foundation/go-opera/logger"
-	"github.com/Fantom-foundation/go-opera/opera/genesis/driver"
-	"github.com/Fantom-foundation/go-opera/opera/genesis/driverauth"
-	"github.com/Fantom-foundation/go-opera/opera/genesis/evmwriter"
-	"github.com/Fantom-foundation/go-opera/opera/genesis/netinit"
-	"github.com/Fantom-foundation/go-opera/opera/genesis/sfc"
-	"github.com/Fantom-foundation/go-opera/utils"
+	"github.com/AIRE-labs/go-airenet/gossip/contract/driver100"
+	"github.com/AIRE-labs/go-airenet/gossip/contract/driverauth100"
+	"github.com/AIRE-labs/go-airenet/gossip/contract/netinit100"
+	"github.com/AIRE-labs/go-airenet/gossip/contract/sfc100"
+	"github.com/AIRE-labs/go-airenet/logger"
+	"github.com/AIRE-labs/go-airenet/aire/genesis/driver"
+	"github.com/AIRE-labs/go-airenet/aire/genesis/driverauth"
+	"github.com/AIRE-labs/go-airenet/aire/genesis/evmwriter"
+	"github.com/AIRE-labs/go-airenet/aire/genesis/netinit"
+	"github.com/AIRE-labs/go-airenet/aire/genesis/sfc"
+	"github.com/AIRE-labs/go-airenet/utils"
 )
 
 func TestSFC(t *testing.T) {
