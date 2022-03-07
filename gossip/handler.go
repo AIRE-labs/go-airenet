@@ -26,12 +26,12 @@ import (
 	"github.com/ethereum/go-ethereum/p2p"
 	"github.com/ethereum/go-ethereum/rlp"
 
+	"github.com/AIRE-labs/go-airenet/aire"
 	"github.com/AIRE-labs/go-airenet/eventcheck"
 	"github.com/AIRE-labs/go-airenet/eventcheck/parentlesscheck"
 	"github.com/AIRE-labs/go-airenet/evmcore"
 	"github.com/AIRE-labs/go-airenet/inter"
 	"github.com/AIRE-labs/go-airenet/logger"
-	"github.com/AIRE-labs/go-airenet/aire"
 )
 
 const (
@@ -432,7 +432,7 @@ func (pm *ProtocolManager) Start(maxPeers int) {
 }
 
 func (pm *ProtocolManager) Stop() {
-	log.Info("Stopping Fantom protocol")
+	log.Info("Stopping AIRE protocol")
 
 	pm.leecher.Stop()
 	pm.seeder.Stop()
@@ -466,7 +466,7 @@ func (pm *ProtocolManager) Stop() {
 	// Wait for all peer handler goroutines to come down.
 	pm.wg.Wait()
 
-	log.Info("Fantom protocol stopped")
+	log.Info("AIRE protocol stopped")
 }
 
 func (pm *ProtocolManager) myProgress() PeerProgress {
