@@ -22,11 +22,11 @@ import (
 	"github.com/ethereum/go-ethereum/core/vm"
 	"github.com/ethereum/go-ethereum/crypto"
 
+	"github.com/AIRE-labs/go-airenet/aire"
+	"github.com/AIRE-labs/go-airenet/aire/genesis/gpos"
 	"github.com/AIRE-labs/go-airenet/evmcore"
 	"github.com/AIRE-labs/go-airenet/integration/makegenesis"
 	"github.com/AIRE-labs/go-airenet/inter"
-	"github.com/AIRE-labs/go-airenet/aire"
-	"github.com/AIRE-labs/go-airenet/aire/genesis/gpos"
 	"github.com/AIRE-labs/go-airenet/utils"
 	"github.com/AIRE-labs/go-airenet/utils/gsignercache"
 )
@@ -67,7 +67,7 @@ type testEnv struct {
 }
 
 func newTestEnv() *testEnv {
-	genStore := makegenesis.FakeGenesisStore(genesisStakers, utils.ToFtm(genesisBalance), utils.ToFtm(genesisStake))
+	genStore := makegenesis.FakeGenesisStore(genesisStakers, utils.ToAIRE(genesisBalance), utils.ToAIRE(genesisStake))
 	genesis := genStore.GetGenesis()
 
 	genesis.Rules.Epochs.MaxEpochDuration = inter.Timestamp(maxEpochDuration)

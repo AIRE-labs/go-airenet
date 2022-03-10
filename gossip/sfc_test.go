@@ -35,16 +35,16 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/AIRE-labs/go-airenet/gossip/contract/driver100"
-	"github.com/AIRE-labs/go-airenet/gossip/contract/driverauth100"
-	"github.com/AIRE-labs/go-airenet/gossip/contract/netinit100"
-	"github.com/AIRE-labs/go-airenet/gossip/contract/sfc100"
-	"github.com/AIRE-labs/go-airenet/logger"
 	"github.com/AIRE-labs/go-airenet/aire/genesis/driver"
 	"github.com/AIRE-labs/go-airenet/aire/genesis/driverauth"
 	"github.com/AIRE-labs/go-airenet/aire/genesis/evmwriter"
 	"github.com/AIRE-labs/go-airenet/aire/genesis/netinit"
 	"github.com/AIRE-labs/go-airenet/aire/genesis/sfc"
+	"github.com/AIRE-labs/go-airenet/gossip/contract/driver100"
+	"github.com/AIRE-labs/go-airenet/gossip/contract/driverauth100"
+	"github.com/AIRE-labs/go-airenet/gossip/contract/netinit100"
+	"github.com/AIRE-labs/go-airenet/gossip/contract/sfc100"
+	"github.com/AIRE-labs/go-airenet/logger"
 	"github.com/AIRE-labs/go-airenet/utils"
 )
 
@@ -140,7 +140,7 @@ func TestSFC(t *testing.T) {
 
 			// create new
 			rr := env.ApplyBlock(nextEpoch,
-				env.Contract(admin, utils.ToFtm(0), sfc100.ContractBin),
+				env.Contract(admin, utils.ToAIRE(0), sfc100.ContractBin),
 			)
 			require.Equal(1, rr.Len())
 			require.Equal(types.ReceiptStatusSuccessful, rr[0].Status)
@@ -172,7 +172,7 @@ func TestSFC(t *testing.T) {
 		// create new
 		anyContractBin := driver100.ContractBin
 		rr := env.ApplyBlock(nextEpoch,
-			env.Contract(admin, utils.ToFtm(0), anyContractBin),
+			env.Contract(admin, utils.ToAIRE(0), anyContractBin),
 		)
 		require.Equal(1, rr.Len())
 		require.Equal(types.ReceiptStatusSuccessful, rr[0].Status)
@@ -204,7 +204,7 @@ func cicleTransfers(t *testing.T, env *testEnv, count uint64) {
 		for i := range txs {
 			from := (i)%accounts + 1
 			to := (i+1)%accounts + 1
-			txs[i] = env.Transfer(from, to, utils.ToFtm(100))
+			txs[i] = env.Transfer(from, to, utils.ToAIRE(100))
 		}
 
 		rr := env.ApplyBlock(sameEpoch, txs...)

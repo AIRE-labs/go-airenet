@@ -24,13 +24,13 @@ import (
 	"github.com/naoina/toml"
 	"gopkg.in/urfave/cli.v1"
 
+	"github.com/AIRE-labs/go-airenet/aire"
+	"github.com/AIRE-labs/go-airenet/aire/genesisstore"
 	"github.com/AIRE-labs/go-airenet/evmcore"
 	"github.com/AIRE-labs/go-airenet/gossip"
 	"github.com/AIRE-labs/go-airenet/gossip/gasprice"
 	"github.com/AIRE-labs/go-airenet/integration"
 	"github.com/AIRE-labs/go-airenet/integration/makegenesis"
-	"github.com/AIRE-labs/go-airenet/aire"
-	"github.com/AIRE-labs/go-airenet/aire/genesisstore"
 	futils "github.com/AIRE-labs/go-airenet/utils"
 	"github.com/AIRE-labs/go-airenet/vecmt"
 )
@@ -81,12 +81,12 @@ var (
 
 	RPCGlobalGasCapFlag = cli.Uint64Flag{
 		Name:  "rpc.gascap",
-		Usage: "Sets a cap on gas that can be used in ftm_call/estimateGas (0=infinite)",
+		Usage: "Sets a cap on gas that can be used in aire_call/estimateGas (0=infinite)",
 		Value: gossip.DefaultConfig(cachescale.Identity).RPCGasCap,
 	}
 	RPCGlobalTxFeeCapFlag = cli.Float64Flag{
 		Name:  "rpc.txfeecap",
-		Usage: "Sets a cap on transaction fee (in FTM) that can be sent via the RPC APIs (0 = no cap)",
+		Usage: "Sets a cap on transaction fee (in AIRE) that can be sent via the RPC APIs (0 = no cap)",
 		Value: gossip.DefaultConfig(cachescale.Identity).RPCTxFeeCap,
 	}
 
@@ -165,7 +165,7 @@ func getAIREGenesis(ctx *cli.Context) integration.InputGenesis {
 		if err != nil {
 			log.Crit("Invalid flag", "flag", FakeNetFlag.Name, "err", err)
 		}
-		fakeGenesisStore := makegenesis.FakeGenesisStore(num, futils.ToFtm(1000000000), futils.ToFtm(5000000))
+		fakeGenesisStore := makegenesis.FakeGenesisStore(num, futils.ToAIRE(1000000000), futils.ToAIRE(5000000))
 		genesis = integration.InputGenesis{
 			Hash: fakeGenesisStore.Hash(),
 			Read: func(store *genesisstore.Store) error {
@@ -395,8 +395,8 @@ func defaultNodeConfig() node.Config {
 	cfg := NodeDefaultConfig
 	cfg.Name = clientIdentifier
 	cfg.Version = params.VersionWithCommit(gitCommit, gitDate)
-	cfg.HTTPModules = append(cfg.HTTPModules, "eth", "ftm", "dag", "sfc", "abft", "web3")
-	cfg.WSModules = append(cfg.WSModules, "eth", "ftm", "dag", "sfc", "abft", "web3")
+	cfg.HTTPModules = append(cfg.HTTPModules, "eth", "aire", "dag", "sfc", "abft", "web3")
+	cfg.WSModules = append(cfg.WSModules, "eth", "aire", "dag", "sfc", "abft", "web3")
 	cfg.IPCPath = "aire.ipc"
 	cfg.DataDir = DefaultDataDir()
 	return cfg

@@ -46,9 +46,9 @@ import (
 	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/tyler-smith/go-bip39"
 
+	"github.com/AIRE-labs/go-airenet/aire"
 	"github.com/AIRE-labs/go-airenet/evmcore"
 	"github.com/AIRE-labs/go-airenet/inter"
-	"github.com/AIRE-labs/go-airenet/aire"
 	"github.com/AIRE-labs/go-airenet/utils/gsignercache"
 )
 
@@ -2184,7 +2184,7 @@ func checkTxFee(gasPrice *big.Int, gas uint64, cap float64) error {
 	feeEth := new(big.Float).Quo(new(big.Float).SetInt(new(big.Int).Mul(gasPrice, new(big.Int).SetUint64(gas))), new(big.Float).SetInt(big.NewInt(params.Ether)))
 	feeFloat, _ := feeEth.Float64()
 	if feeFloat > cap {
-		return fmt.Errorf("tx fee (%.2f FTM) exceeds the configured cap (%.2f FTM)", feeFloat, cap)
+		return fmt.Errorf("tx fee (%.2f AIRE) exceeds the configured cap (%.2f AIRE)", feeFloat, cap)
 	}
 	return nil
 }

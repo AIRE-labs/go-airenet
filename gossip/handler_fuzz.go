@@ -58,7 +58,7 @@ func makeFuzzedPM() (pm *ProtocolManager, err error) {
 		genesisStake   = 2 * 4e6
 	)
 
-	genStore := makegenesis.FakeGenesisStore(genesisStakers, utils.ToFtm(genesisBalance), utils.ToFtm(genesisStake))
+	genStore := makegenesis.FakeGenesisStore(genesisStakers, utils.ToAIRE(genesisBalance), utils.ToAIRE(genesisStake))
 	genesis := genStore.GetGenesis()
 
 	config := DefaultConfig()

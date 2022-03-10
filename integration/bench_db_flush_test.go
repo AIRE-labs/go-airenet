@@ -15,10 +15,10 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/syndtr/goleveldb/leveldb/opt"
 
+	"github.com/AIRE-labs/go-airenet/aire/genesisstore"
 	"github.com/AIRE-labs/go-airenet/gossip"
 	"github.com/AIRE-labs/go-airenet/integration/makegenesis"
 	"github.com/AIRE-labs/go-airenet/inter"
-	"github.com/AIRE-labs/go-airenet/aire/genesisstore"
 	"github.com/AIRE-labs/go-airenet/utils"
 	"github.com/AIRE-labs/go-airenet/vecmt"
 )
@@ -26,7 +26,7 @@ import (
 func BenchmarkFlushDBs(b *testing.B) {
 	rawProducer, dir := dbProducer("flush_bench")
 	defer os.RemoveAll(dir)
-	genStore := makegenesis.FakeGenesisStore(1, utils.ToFtm(1), utils.ToFtm(1))
+	genStore := makegenesis.FakeGenesisStore(1, utils.ToAIRE(1), utils.ToAIRE(1))
 	_, _, store, s2, s3, _ := MakeEngine(rawProducer, InputGenesis{
 		Hash: genStore.Hash(),
 		Read: func(store *genesisstore.Store) error {
