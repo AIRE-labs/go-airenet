@@ -23,6 +23,7 @@ import (
 	"github.com/ethereum/go-ethereum/p2p/enr"
 	"github.com/ethereum/go-ethereum/rpc"
 
+	"github.com/AIRE-labs/go-airenet/aire"
 	"github.com/AIRE-labs/go-airenet/ethapi"
 	"github.com/AIRE-labs/go-airenet/eventcheck"
 	"github.com/AIRE-labs/go-airenet/eventcheck/basiccheck"
@@ -42,7 +43,6 @@ import (
 	"github.com/AIRE-labs/go-airenet/gossip/gasprice"
 	"github.com/AIRE-labs/go-airenet/inter"
 	"github.com/AIRE-labs/go-airenet/logger"
-	"github.com/AIRE-labs/go-airenet/aire"
 	"github.com/AIRE-labs/go-airenet/utils/gsignercache"
 	"github.com/AIRE-labs/go-airenet/utils/wgmutex"
 	"github.com/AIRE-labs/go-airenet/valkeystore"
@@ -367,7 +367,7 @@ func (s *Service) WaitBlockEnd() {
 
 // Stop method invoked when the node terminates the service.
 func (s *Service) Stop() error {
-	defer log.Info("Fantom service stopped")
+	defer log.Info("AIRE service stopped")
 	s.verWatcher.Stop()
 	close(s.done)
 	s.emitter.Stop()

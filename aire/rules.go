@@ -13,8 +13,8 @@ import (
 	ethparams "github.com/ethereum/go-ethereum/params"
 	"github.com/ethereum/go-ethereum/rlp"
 
-	"github.com/AIRE-labs/go-airenet/inter"
 	"github.com/AIRE-labs/go-airenet/aire/genesis/evmwriter"
+	"github.com/AIRE-labs/go-airenet/inter"
 )
 
 const (
@@ -165,7 +165,7 @@ func DefaultEconomyRules() EconomyRules {
 	return EconomyRules{
 		BlockMissedSlack: 50,
 		Gas:              DefaultGasRules(),
-		MinGasPrice:      big.NewInt(1e9),
+		MinGasPrice:      big.NewInt(1e3),
 		ShortGasPower:    DefaultShortGasPowerRules(),
 		LongGasPower:     DefaulLongGasPowerRules(),
 	}
