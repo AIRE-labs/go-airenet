@@ -40,7 +40,8 @@ SUBCOMMANDS:
 	AppHelpTemplate = `NAME:
    {{.App.Name}} - {{.App.Usage}}
 
-   Copyright 2019-2021 The go-airenet Authors
+   Copyright 2021-2022 The AIRE Labs, Pr1mer Tech. All rights reserved.
+   - Thanks to the Ethereum Foundation and Fantom Foundation for their work.
 
 USAGE:
    {{.App.HelpName}} [options]{{if .App.Commands}} command [command options]{{end}} {{if .App.ArgsUsage}}{{.App.ArgsUsage}}{{else}}[arguments...]{{end}}
